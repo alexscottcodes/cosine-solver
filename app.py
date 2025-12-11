@@ -26,41 +26,41 @@ def solve_law_of_cosines(a, b, c, A, B, C):
         # Case 1: Three sides known (SSS) - find all angles
         if known_sides == 3 and known_angles == 0:
             steps.append("### 📚 Step-by-Step Solution (SSS Case)")
-            steps.append(f"\n**Given:** a = {a}, b = {b}, c = {c}")
+            steps.append(f"\n**Given:** $a = {a}$, $b = {b}$, $c = {c}$")
             steps.append("\n---")
             
             # Find angle A: cos(A) = (b² + c² - a²) / (2bc)
             steps.append(f"\n**Step 1: Find Angle A using Law of Cosines**")
-            steps.append(f"Formula: cos(A) = (b² + c² - a²) / (2bc)")
+            steps.append(f"\n$\\cos(A) = \\frac{{b^2 + c^2 - a^2}}{{2bc}}$")
             steps.append(f"\nSubstitute values:")
-            steps.append(f"cos(A) = ({b}² + {c}² - {a}²) / (2 × {b} × {c})")
-            steps.append(f"cos(A) = ({b**2} + {c**2} - {a**2}) / ({2*b*c})")
+            steps.append(f"$\\cos(A) = \\frac{{{b}^2 + {c}^2 - {a}^2}}{{2 \\times {b} \\times {c}}}$")
+            steps.append(f"$\\cos(A) = \\frac{{{b**2} + {c**2} - {a**2}}}{{{2*b*c}}}$")
             cos_A = (b**2 + c**2 - a**2) / (2 * b * c)
-            steps.append(f"cos(A) = {cos_A:.6f}")
+            steps.append(f"$\\cos(A) = {cos_A:.6f}$")
             A_rad = math.acos(np.clip(cos_A, -1, 1))
             A = math.degrees(A_rad)
-            steps.append(f"A = arccos({cos_A:.6f}) = **{A:.4f}°**")
+            steps.append(f"$A = \\arccos({cos_A:.6f}) = \\mathbf{{{A:.4f}°}}$")
             
             # Find angle B: cos(B) = (a² + c² - b²) / (2ac)
             steps.append(f"\n**Step 2: Find Angle B using Law of Cosines**")
-            steps.append(f"Formula: cos(B) = (a² + c² - b²) / (2ac)")
+            steps.append(f"\n$\\cos(B) = \\frac{{a^2 + c^2 - b^2}}{{2ac}}$")
             steps.append(f"\nSubstitute values:")
-            steps.append(f"cos(B) = ({a}² + {c}² - {b}²) / (2 × {a} × {c})")
-            steps.append(f"cos(B) = ({a**2} + {c**2} - {b**2}) / ({2*a*c})")
+            steps.append(f"$\\cos(B) = \\frac{{{a}^2 + {c}^2 - {b}^2}}{{2 \\times {a} \\times {c}}}$")
+            steps.append(f"$\\cos(B) = \\frac{{{a**2} + {c**2} - {b**2}}}{{{2*a*c}}}$")
             cos_B = (a**2 + c**2 - b**2) / (2 * a * c)
-            steps.append(f"cos(B) = {cos_B:.6f}")
+            steps.append(f"$\\cos(B) = {cos_B:.6f}$")
             B_rad = math.acos(np.clip(cos_B, -1, 1))
             B = math.degrees(B_rad)
-            steps.append(f"B = arccos({cos_B:.6f}) = **{B:.4f}°**")
+            steps.append(f"$B = \\arccos({cos_B:.6f}) = \\mathbf{{{B:.4f}°}}$")
             
             # Find angle C: C = 180 - A - B
             steps.append(f"\n**Step 3: Find Angle C using angle sum property**")
-            steps.append(f"Formula: A + B + C = 180°")
-            steps.append(f"\nC = 180° - A - B")
-            steps.append(f"C = 180° - {A:.4f}° - {B:.4f}°")
+            steps.append(f"\n$A + B + C = 180°$")
+            steps.append(f"$C = 180° - A - B$")
+            steps.append(f"$C = 180° - {A:.4f}° - {B:.4f}°$")
             C = 180 - A - B
             C_rad = math.radians(C)
-            steps.append(f"C = **{C:.4f}°**")
+            steps.append(f"$C = \\mathbf{{{C:.4f}°}}$")
             
             results.append(f"**Solution (SSS Case):**")
             results.append(f"- Side a = {a:.4f}")
@@ -75,99 +75,99 @@ def solve_law_of_cosines(a, b, c, A, B, C):
             steps.append("### 📚 Step-by-Step Solution (SAS Case)")
             
             if a and b and C_rad:
-                steps.append(f"\n**Given:** a = {a}, b = {b}, C = {C}°")
+                steps.append(f"\n**Given:** $a = {a}$, $b = {b}$, $C = {C}°$")
                 steps.append("\n---")
                 
                 # Find side c: c² = a² + b² - 2ab·cos(C)
                 steps.append(f"\n**Step 1: Find Side c using Law of Cosines**")
-                steps.append(f"Formula: c² = a² + b² - 2ab·cos(C)")
+                steps.append(f"\n$c^2 = a^2 + b^2 - 2ab\\cos(C)$")
                 steps.append(f"\nSubstitute values:")
-                steps.append(f"c² = {a}² + {b}² - 2({a})({b})·cos({C}°)")
-                steps.append(f"c² = {a**2} + {b**2} - {2*a*b}·cos({C}°)")
+                steps.append(f"$c^2 = {a}^2 + {b}^2 - 2({a})({b})\\cos({C}°)$")
+                steps.append(f"$c^2 = {a**2} + {b**2} - {2*a*b}\\cos({C}°)$")
                 c_squared = a**2 + b**2 - 2*a*b*math.cos(C_rad)
-                steps.append(f"c² = {a**2} + {b**2} - {2*a*b*math.cos(C_rad):.6f}")
-                steps.append(f"c² = {c_squared:.6f}")
+                steps.append(f"$c^2 = {a**2} + {b**2} - {2*a*b*math.cos(C_rad):.6f}$")
+                steps.append(f"$c^2 = {c_squared:.6f}$")
                 c = math.sqrt(c_squared)
-                steps.append(f"c = √{c_squared:.6f} = **{c:.4f}**")
+                steps.append(f"$c = \\sqrt{{{c_squared:.6f}}} = \\mathbf{{{c:.4f}}}$")
                 
                 # Find angle A
                 steps.append(f"\n**Step 2: Find Angle A using Law of Cosines**")
-                steps.append(f"Formula: cos(A) = (b² + c² - a²) / (2bc)")
+                steps.append(f"\n$\\cos(A) = \\frac{{b^2 + c^2 - a^2}}{{2bc}}$")
                 steps.append(f"\nSubstitute values:")
-                steps.append(f"cos(A) = ({b}² + {c:.4f}² - {a}²) / (2 × {b} × {c:.4f})")
+                steps.append(f"$\\cos(A) = \\frac{{{b}^2 + {c:.4f}^2 - {a}^2}}{{2 \\times {b} \\times {c:.4f}}}$")
                 cos_A = (b**2 + c**2 - a**2) / (2 * b * c)
-                steps.append(f"cos(A) = {cos_A:.6f}")
+                steps.append(f"$\\cos(A) = {cos_A:.6f}$")
                 A_rad = math.acos(np.clip(cos_A, -1, 1))
                 A = math.degrees(A_rad)
-                steps.append(f"A = arccos({cos_A:.6f}) = **{A:.4f}°**")
+                steps.append(f"$A = \\arccos({cos_A:.6f}) = \\mathbf{{{A:.4f}°}}$")
                 
                 # Find angle B
                 steps.append(f"\n**Step 3: Find Angle B using angle sum property**")
-                steps.append(f"B = 180° - A - C")
-                steps.append(f"B = 180° - {A:.4f}° - {C}°")
+                steps.append(f"$B = 180° - A - C$")
+                steps.append(f"$B = 180° - {A:.4f}° - {C}°$")
                 B = 180 - A - C
                 B_rad = math.radians(B)
-                steps.append(f"B = **{B:.4f}°**")
+                steps.append(f"$B = \\mathbf{{{B:.4f}°}}$")
                 
             elif a and c and B_rad:
-                steps.append(f"\n**Given:** a = {a}, c = {c}, B = {B}°")
+                steps.append(f"\n**Given:** $a = {a}$, $c = {c}$, $B = {B}°$")
                 steps.append("\n---")
                 
                 # Find side b: b² = a² + c² - 2ac·cos(B)
                 steps.append(f"\n**Step 1: Find Side b using Law of Cosines**")
-                steps.append(f"Formula: b² = a² + c² - 2ac·cos(B)")
+                steps.append(f"\n$b^2 = a^2 + c^2 - 2ac\\cos(B)$")
                 steps.append(f"\nSubstitute values:")
-                steps.append(f"b² = {a}² + {c}² - 2({a})({c})·cos({B}°)")
+                steps.append(f"$b^2 = {a}^2 + {c}^2 - 2({a})({c})\\cos({B}°)$")
                 b_squared = a**2 + c**2 - 2*a*c*math.cos(B_rad)
-                steps.append(f"b² = {b_squared:.6f}")
+                steps.append(f"$b^2 = {b_squared:.6f}$")
                 b = math.sqrt(b_squared)
-                steps.append(f"b = √{b_squared:.6f} = **{b:.4f}**")
+                steps.append(f"$b = \\sqrt{{{b_squared:.6f}}} = \\mathbf{{{b:.4f}}}$")
                 
                 # Find angle A
                 steps.append(f"\n**Step 2: Find Angle A using Law of Cosines**")
-                steps.append(f"Formula: cos(A) = (b² + c² - a²) / (2bc)")
+                steps.append(f"\n$\\cos(A) = \\frac{{b^2 + c^2 - a^2}}{{2bc}}$")
                 cos_A = (b**2 + c**2 - a**2) / (2 * b * c)
-                steps.append(f"cos(A) = {cos_A:.6f}")
+                steps.append(f"$\\cos(A) = {cos_A:.6f}$")
                 A_rad = math.acos(np.clip(cos_A, -1, 1))
                 A = math.degrees(A_rad)
-                steps.append(f"A = **{A:.4f}°**")
+                steps.append(f"$A = \\mathbf{{{A:.4f}°}}$")
                 
                 # Find angle C
                 steps.append(f"\n**Step 3: Find Angle C**")
-                steps.append(f"C = 180° - A - B")
+                steps.append(f"$C = 180° - A - B$")
                 C = 180 - A - B
                 C_rad = math.radians(C)
-                steps.append(f"C = **{C:.4f}°**")
+                steps.append(f"$C = \\mathbf{{{C:.4f}°}}$")
                 
             elif b and c and A_rad:
-                steps.append(f"\n**Given:** b = {b}, c = {c}, A = {A}°")
+                steps.append(f"\n**Given:** $b = {b}$, $c = {c}$, $A = {A}°$")
                 steps.append("\n---")
                 
                 # Find side a: a² = b² + c² - 2bc·cos(A)
                 steps.append(f"\n**Step 1: Find Side a using Law of Cosines**")
-                steps.append(f"Formula: a² = b² + c² - 2bc·cos(A)")
+                steps.append(f"\n$a^2 = b^2 + c^2 - 2bc\\cos(A)$")
                 steps.append(f"\nSubstitute values:")
-                steps.append(f"a² = {b}² + {c}² - 2({b})({c})·cos({A}°)")
+                steps.append(f"$a^2 = {b}^2 + {c}^2 - 2({b})({c})\\cos({A}°)$")
                 a_squared = b**2 + c**2 - 2*b*c*math.cos(A_rad)
-                steps.append(f"a² = {a_squared:.6f}")
+                steps.append(f"$a^2 = {a_squared:.6f}$")
                 a = math.sqrt(a_squared)
-                steps.append(f"a = √{a_squared:.6f} = **{a:.4f}**")
+                steps.append(f"$a = \\sqrt{{{a_squared:.6f}}} = \\mathbf{{{a:.4f}}}$")
                 
                 # Find angle B
                 steps.append(f"\n**Step 2: Find Angle B using Law of Cosines**")
-                steps.append(f"Formula: cos(B) = (a² + c² - b²) / (2ac)")
+                steps.append(f"\n$\\cos(B) = \\frac{{a^2 + c^2 - b^2}}{{2ac}}$")
                 cos_B = (a**2 + c**2 - b**2) / (2 * a * c)
-                steps.append(f"cos(B) = {cos_B:.6f}")
+                steps.append(f"$\\cos(B) = {cos_B:.6f}$")
                 B_rad = math.acos(np.clip(cos_B, -1, 1))
                 B = math.degrees(B_rad)
-                steps.append(f"B = **{B:.4f}°**")
+                steps.append(f"$B = \\mathbf{{{B:.4f}°}}$")
                 
                 # Find angle C
                 steps.append(f"\n**Step 3: Find Angle C**")
-                steps.append(f"C = 180° - A - B")
+                steps.append(f"$C = 180° - A - B$")
                 C = 180 - A - B
                 C_rad = math.radians(C)
-                steps.append(f"C = **{C:.4f}°**")
+                steps.append(f"$C = \\mathbf{{{C:.4f}°}}$")
             
             results.append(f"**Solution (SAS Case):**")
             results.append(f"- Side a = {a:.4f}")
@@ -183,68 +183,68 @@ def solve_law_of_cosines(a, b, c, A, B, C):
             
             # First find the third angle
             if A and B:
-                steps.append(f"\n**Given:** A = {A}°, B = {B}°, and one side")
+                steps.append(f"\n**Given:** $A = {A}°$, $B = {B}°$, and one side")
                 steps.append("\n---")
                 steps.append(f"\n**Step 1: Find Angle C**")
-                steps.append(f"A + B + C = 180°")
-                steps.append(f"C = 180° - A - B")
-                steps.append(f"C = 180° - {A}° - {B}°")
+                steps.append(f"$A + B + C = 180°$")
+                steps.append(f"$C = 180° - A - B$")
+                steps.append(f"$C = 180° - {A}° - {B}°$")
                 C = 180 - A - B
                 C_rad = math.radians(C)
-                steps.append(f"C = **{C:.4f}°**")
+                steps.append(f"$C = \\mathbf{{{C:.4f}°}}$")
             elif A and C:
-                steps.append(f"\n**Given:** A = {A}°, C = {C}°, and one side")
+                steps.append(f"\n**Given:** $A = {A}°$, $C = {C}°$, and one side")
                 steps.append("\n---")
                 steps.append(f"\n**Step 1: Find Angle B**")
-                steps.append(f"B = 180° - A - C")
+                steps.append(f"$B = 180° - A - C$")
                 B = 180 - A - C
                 B_rad = math.radians(B)
-                steps.append(f"B = **{B:.4f}°**")
+                steps.append(f"$B = \\mathbf{{{B:.4f}°}}$")
             elif B and C:
-                steps.append(f"\n**Given:** B = {B}°, C = {C}°, and one side")
+                steps.append(f"\n**Given:** $B = {B}°$, $C = {C}°$, and one side")
                 steps.append("\n---")
                 steps.append(f"\n**Step 1: Find Angle A**")
-                steps.append(f"A = 180° - B - C")
+                steps.append(f"$A = 180° - B - C$")
                 A = 180 - B - C
                 A_rad = math.radians(A)
-                steps.append(f"A = **{A:.4f}°**")
+                steps.append(f"$A = \\mathbf{{{A:.4f}°}}$")
             
             # Use Law of Sines to find other sides
             if a:
                 steps.append(f"\n**Step 2: Find Side b using Law of Sines**")
-                steps.append(f"Formula: a/sin(A) = b/sin(B)")
-                steps.append(f"b = a × sin(B) / sin(A)")
-                steps.append(f"b = {a} × sin({B:.4f}°) / sin({A:.4f}°)")
+                steps.append(f"\n$\\frac{{a}}{{\\sin(A)}} = \\frac{{b}}{{\\sin(B)}}$")
+                steps.append(f"$b = a \\times \\frac{{\\sin(B)}}{{\\sin(A)}}$")
+                steps.append(f"$b = {a} \\times \\frac{{\\sin({B:.4f}°)}}{{\\sin({A:.4f}°)}}$")
                 b = a * math.sin(B_rad) / math.sin(A_rad)
-                steps.append(f"b = **{b:.4f}**")
+                steps.append(f"$b = \\mathbf{{{b:.4f}}}$")
                 
                 steps.append(f"\n**Step 3: Find Side c using Law of Sines**")
-                steps.append(f"c = a × sin(C) / sin(A)")
-                steps.append(f"c = {a} × sin({C:.4f}°) / sin({A:.4f}°)")
+                steps.append(f"$c = a \\times \\frac{{\\sin(C)}}{{\\sin(A)}}$")
+                steps.append(f"$c = {a} \\times \\frac{{\\sin({C:.4f}°)}}{{\\sin({A:.4f}°)}}$")
                 c = a * math.sin(C_rad) / math.sin(A_rad)
-                steps.append(f"c = **{c:.4f}**")
+                steps.append(f"$c = \\mathbf{{{c:.4f}}}$")
                 
             elif b:
                 steps.append(f"\n**Step 2: Find Side a using Law of Sines**")
-                steps.append(f"a = b × sin(A) / sin(B)")
+                steps.append(f"$a = b \\times \\frac{{\\sin(A)}}{{\\sin(B)}}$")
                 a = b * math.sin(A_rad) / math.sin(B_rad)
-                steps.append(f"a = **{a:.4f}**")
+                steps.append(f"$a = \\mathbf{{{a:.4f}}}$")
                 
                 steps.append(f"\n**Step 3: Find Side c using Law of Sines**")
-                steps.append(f"c = b × sin(C) / sin(B)")
+                steps.append(f"$c = b \\times \\frac{{\\sin(C)}}{{\\sin(B)}}$")
                 c = b * math.sin(C_rad) / math.sin(B_rad)
-                steps.append(f"c = **{c:.4f}**")
+                steps.append(f"$c = \\mathbf{{{c:.4f}}}$")
                 
             elif c:
                 steps.append(f"\n**Step 2: Find Side a using Law of Sines**")
-                steps.append(f"a = c × sin(A) / sin(C)")
+                steps.append(f"$a = c \\times \\frac{{\\sin(A)}}{{\\sin(C)}}$")
                 a = c * math.sin(A_rad) / math.sin(C_rad)
-                steps.append(f"a = **{a:.4f}**")
+                steps.append(f"$a = \\mathbf{{{a:.4f}}}$")
                 
                 steps.append(f"\n**Step 3: Find Side b using Law of Sines**")
-                steps.append(f"b = c × sin(B) / sin(C)")
+                steps.append(f"$b = c \\times \\frac{{\\sin(B)}}{{\\sin(C)}}$")
                 b = c * math.sin(B_rad) / math.sin(C_rad)
-                steps.append(f"b = **{b:.4f}**")
+                steps.append(f"$b = \\mathbf{{{b:.4f}}}$")
             
             results.append(f"**Solution (ASA/AAS Case):**")
             results.append(f"- Side a = {a:.4f}")
@@ -353,6 +353,8 @@ with gr.Blocks(title="Law of Cosines Solver") as app:
         - **ASA/AAS**: One side and two angles → finds other sides
     
     **Note:** Side *a* is opposite to angle *A*, side *b* is opposite to angle *B*, and side *c* is opposite to angle *C*
+    
+    **Features:** ✨ Beautiful LaTeX-rendered equations in step-by-step solutions
     """)
     
     with gr.Row():
