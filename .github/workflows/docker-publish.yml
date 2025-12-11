@@ -1,0 +1,87 @@
+name: Build and Push to GHCR
+
+# Trigger on push to main branch or on tags
+on:
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - main
+      - master
+
+# Required permissions for GITHUB_TOKEN
+permissions:
+  contents: read
+  packages: write
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Set up Docker Buildx for advanced build features
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # Log in to GitHub Container Registry
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Extract metadata (tags, labels) for Docker
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            # Tag as "latest" for main/master branch
+            type=raw,value=latest,enable={{is_default_branch}}
+            # Use git tag (e.g., v1.0.0)
+            type=ref,event=tag
+            # Use branch name
+            type=ref,event=branch
+            # Use PR number for pull requests
+            type=ref,event=pr
+            # Short SHA for commits
+            type=sha,prefix={{branch}}-
+          labels: |
+            org.opencontainers.image.title=Law of Cosines Solver
+            org.opencontainers.image.description=Gradio application for solving triangles using the Law of Cosines
+            org.opencontainers.image.vendor=${{ github.repository_owner }}
+
+      # Build and push Docker image
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          # Only push on main/master branch or tags (not on PRs)
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          # Enable build caching for faster builds
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          # Add SBOM and provenance for security
+          provenance: true
+          sbom: true
+
+      # Output image details
+      - name: Image digest
+        run: echo ${{ steps.meta.outputs.tags }}

@@ -1,6 +1,11 @@
 # Use Python 3.12 slim image as base
 FROM python:3.12-slim
 
+# Add label to link image to repository (important for GHCR)
+LABEL org.opencontainers.image.source=https://github.com/alexscottcodes/cosine-solver
+LABEL org.opencontainers.image.description="Law of Cosines Triangle Solver with Gradio"
+LABEL org.opencontainers.image.licenses=Apache-2.0
+
 # Set working directory
 WORKDIR /app
 
