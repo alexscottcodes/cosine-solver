@@ -25,16 +25,34 @@ You need Python 3.7+ installed along with the following libraries:
 1. Clone this repository or download the source code.
 
 2. Install the required dependencies using pip:
-```pip install gradio numpy matplotlib```
+```pip install gradio numpy matplotlib``` or ```pip install -r requirements.txt```
 
 
 ## 🚀 Usage
 
-1. Save the code into a file named ```app.py```.
+### Local Dependencies & Run
 
-2. Run the script: ```python app.py```
+1. After installing the dependencies, run the script: ```python app.py```
 
-3. Open the local URL provided in the terminal (usually ```http://127.0.0.1:7860```) in your web browser.
+2. Open the local URL provided in the terminal (usually ```http://127.0.0.1:7860```) in your web browser.
+
+### Docker Image (Pre-Built, Instant Run)
+
+1. Pull the Docker image. Our image is available on the **Github Container Registry**, **Docker Hub**, and **HuggingFace Container Registry** (if you are using the HuggingFace Cotainer Registry, the image might be bigger because they use a different base image and install more dependencies than we do).
+
+- To pull from **GHCR (Github Container Registry) run ```docker pull ghcr.io/alexscottcodes/cosine-solver:latest```.
+- To pull from our official Docker Hub image, run ```docker pull browservm/law-of-cosines-solver:latest```.
+- To pull from the HuggingFace Container Registry run
+
+```
+docker run -it -p 7860:7860 --platform=linux/amd64 \
+	registry.hf.space/namelessai-cosine-solver:latest python app.py
+```
+
+If you pulled from the HuggingFace Container Registry, the app will start automatically. If you pulled from the other two, run the following:
+
+- **GHCR:** ```docker run ghcr.io/alexscottcodes/cosine-solver```
+- **Docker Hub** ```docker run browservm/law-of-cosines-solver```
 
 ## 🧮 How to Use
 
